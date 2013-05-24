@@ -24,30 +24,36 @@ public class KnightTour
     {
         int[] pos = {xpos, ypos};
         double r = Math.random();
-        if(r<0.125)
-            pos[0]+=2;
-            pos[1]+=1;
-        if(r<0.25 && r>=0.125)
-            pos[0]+=2;
-            pos[1]-=1;
-        if(r<0.375 && r>=0.25)
-            pos[0]-=2;
-            pos[1]+=1;
-        if(r<0.5 && r>=0.375)
-            pos[0]-=2;
-            pos[1]-=1;
-        if(r<0.625 && r>=0.375)
-            pos[0]+=1;
-            pos[1]+=2;
-        if(r<0.8 && r>=0.625)
-            pos[0]-=1;
-            pos[1]+=2;
-        if(r<0.925 && r>=0.8)
-            pos[0]-=1;
-            pos[1]-=2;
-        if(r<1 && r>=0.925)
-            pos[0]+=1;
-            pos[1]-=2;
+	boolean selected = false;
+	while(selected!=true)
+	{
+            if(r<0.125)
+                pos[0]+=2;
+                pos[1]+=1;
+            if(r<0.25 && r>=0.125)
+                pos[0]+=2;
+                pos[1]-=1;
+            if(r<0.375 && r>=0.25)
+                pos[0]-=2;
+                pos[1]+=1;
+            if(r<0.5 && r>=0.375)
+                pos[0]-=2;
+                pos[1]-=1;
+            if(r<0.625 && r>=0.375)
+                pos[0]+=1;
+                pos[1]+=2;
+            if(r<0.8 && r>=0.625)
+                pos[0]-=1;
+                pos[1]+=2;
+            if(r<0.925 && r>=0.8)
+                pos[0]-=1;
+                pos[1]-=2;
+            if(r<1 && r>=0.925)
+                pos[0]+=1;
+                pos[1]-=2;
+	if(pos[0]<8 && pos[0]>0 && pos[1]<8 && pos[1]>0)
+		selected=true;
+	}
         a[pos[0]][pos[1]] = 1;
         
     }    
