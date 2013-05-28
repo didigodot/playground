@@ -3,9 +3,7 @@ import java.lang.*;
 
 public class KnightTour
 {
-    int[][] moves = new int[2][8];
-    moves[0][] = {1, 1, -1, -1, 2, 2, -2, -2}; 
-    moves[][];
+    static int[][] moves = new int[][]{{1, 1, -1, -1, 2, 2, -2, -2},{2, -2, 2, -2, 1, -1, 1, -1}}; 
     public static void drawBoard(int[][] board)
     {
      for(int y = 0; y<8; y++)
@@ -78,11 +76,7 @@ public class KnightTour
     	
     public static void move(int[][] board, int[] pos, int movenumber)
     {
-        int[] pos = p; //current position
-        int[] spot = pickSpot(a, pos); //new position
-        int[] old = o; //old position
-        int[] oold = {0,0};
-        if(checkFill(a)==false)
+        if(checkFill(board)==false)
         {
             for(int i = 0; i<8; i++)
             {
@@ -109,7 +103,7 @@ public class KnightTour
         int[] old = pos;
         board[pos[0]][pos[1]] = 1;
         int m = 1;
-        move(board, pos, old, m);
+        move(board, pos, m);
         drawBoard(board); //figure it all out, then draw. 
     }
 }
