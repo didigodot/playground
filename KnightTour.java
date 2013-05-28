@@ -74,31 +74,27 @@ public class KnightTour
             return pair;    
     }   
     	
-    public static void move(int[][] a, int xpos, int ypos, int movenumber)
+    public static void move(int[][] a, int[] p, int[] o, int movenumber)
     {
-        int[] pos = {xpos, ypos}; //current position
+        int[] pos = p; //current position
         int[] spot = pickSpot(a, pos); //new position
-        int[] old = new int[2]; //old position
+        int[] old = o; //old position
+        int[] oold = {0,0};
         if(checkFill(a)==false)
         {
             //if empty, change position. else, try again.
-            if(spot[0]==0 && spot[1]==0) 
+            if(a[spot[0]][spot[1]]==0) 
             {
-                 old=pos; pos=spot;
+                 oold = old; old=pos; pos=spot;
+                 a[pos[0]][pos[1]]=movenumber;
                  movenumber++;
-                 move(a, pos[0], pos[1], movenumber);
+                 move(a, pos, old, movenumber);
             }
             else{
-                if(movenumber==1)
-                    { 
-                    move(a, pos[0], pos[1], movenumber);
-                    }
-                if(movenumber>1)
-                    {
-                    pos = old;
+                    pos = old; old = oold;
                     movenumber-=1;
-                    move(a, pos[0], pos[1], movenumber);
-                    }
+                    a[pos[0]][pos[1]]=movenumber;
+                    //move(a, pos,old, movenumber);
                 }
         }
 	}  
@@ -106,11 +102,11 @@ public class KnightTour
     public static void main(String[] args)
     {
         int[][] board = new int[8][8];
-        int xpos = (int)(Math.random()*7);
-        int ypos = (int)(Math.random()*7);
-        board[xpos][ypos]=1;
+        int[] pos = {(int)(Math.random()*7), (int)(Math.random()*7)};
+        int[] old = pos;
+        board[pos[0]][pos[1]] = 1;
         int m = 1;
-        move(board, xpos, ypos, m);
+        move(board, pos, old, m);
         drawBoard(board); //figure it all out, then draw. 
     }
 }
