@@ -12,7 +12,7 @@ public class KnightTour
                 {
                     if(x==0 && y>0)
                         System.out.println("");
-                    System.out.print(board[x][y]+" ");
+                    System.out.print(board[x][y]+"  ");
 
                 }   
             }
@@ -92,7 +92,6 @@ public class KnightTour
                  move(board, x, movenumber);
                 }
             }
-            board[pos[0]][pos[1]]=0;
         }
      }
       
