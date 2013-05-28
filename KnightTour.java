@@ -3,7 +3,9 @@ import java.lang.*;
 
 public class KnightTour
 {
-    
+    int[][] moves = new int[2][8];
+    moves[0][] = {1, 1, -1, -1, 2, 2, -2, -2}; 
+    moves[][];
     public static void drawBoard(int[][] board)
     {
      for(int y = 0; y<8; y++)
@@ -74,7 +76,7 @@ public class KnightTour
             return pair;    
     }   
     	
-    public static void move(int[][] a, int[] p, int[] o, int movenumber)
+    public static void move(int[][] board, int[] pos, int movenumber)
     {
         int[] pos = p; //current position
         int[] spot = pickSpot(a, pos); //new position
@@ -82,23 +84,23 @@ public class KnightTour
         int[] oold = {0,0};
         if(checkFill(a)==false)
         {
-            //if empty, change position. else, try again.
-            if(a[spot[0]][spot[1]]==0) 
+            for(int i = 0; i<8; i++)
             {
-                 oold = old; old=pos; pos=spot;
+                int newx = pos[0]+moves[0][i];
+                int newy = pos[1]+moves[1][i];
+                if(newx>=0 && newx<8 &&
+                   newy>=0 && newy<8 &&
+                   board[newx][newy]==0)
+                {       
                  movenumber++;
-                 a[pos[0]][pos[1]]=movenumber;
-                 move(a, pos, old, movenumber);
-            }
-            else{
-                    pos = old; old = oold;
-                    if(movenumber>=3)
-                        movenumber-=1;
-                    a[pos[0]][pos[1]]=movenumber;
-                    move(a, pos,old, movenumber);
+                 board[newx][newy]=movenumber;
+                 int[] x = {newx, newy};
+                 move(board, x, movenumber);
                 }
+            }
+            board[pos[0]][pos[1]]=0;
         }
-	}  
+     }
       
     public static void main(String[] args)
     {
