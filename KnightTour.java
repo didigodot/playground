@@ -12,7 +12,10 @@ public class KnightTour
                 {
                     if(x==0 && y>0)
                         System.out.println("");
-                    System.out.print(board[x][y]+"  ");
+	            if(board[x][y]>9)
+		    	System.out.print(board[x][y]+" ");
+	            else
+                    	System.out.print(board[x][y]+"  ");
 
                 }   
             }
