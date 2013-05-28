@@ -34,72 +34,49 @@ public class KnightTour
 				}
 		return b;
 	 }
-						
-				
+    //picks spot at random, doesn't care about whether it works
+	public static int[] pickSpot(int[][] a, int[] pos)
+    {
+	    int[] pair = new int[2]; // wil hold return value
+        while(selected!=true)
+		    {
+	            double r = Math.random();
+                pair[0] = pos[0];
+                pair[1] = pos[1];
+	            if(r<0.125){ pos[0]+=2; pos[1]+=1; }    
+	            if(r<0.25 && r>=0.125)
+	            { pos[0]+=2; pos[1]-=1; }
+	            if(r<0.375 && r>=0.25)
+	            { pos[0]-=2; pos[1]+=1;}
+	            if(r<0.5 && r>=0.375)
+	            {pos[0]-=2; pos[1]-=1;}
+	            if(r<0.625 && r>=0.375)
+	            { pos[0]+=1; pos[1]+=2;}
+	            if(r<0.8 && r>=0.625)
+	            {pos[0]-=1; pos[1]+=2;}
+	            if(r<0.925 && r>=0.8)
+	            {pos[0]-=1; pos[1]-=2;}
+	            if(r<1 && r>=0.925)
+	            { pos[0]+=1; pos[1]-=2;}
+
+		        if(pos[0]<8 && pos[0]>0 && pos[1]<8 && pos[1]>0)
+	            {    
+			       selected=true;
+                   pair = {pos[0], pos[1]}
+	               break;
+	            }
+	            //else reset values
+	            pos[0]=pair[0];
+	            pos[1]=pair[1];
+		     }
+            return pair;    
+    }   
+    	
     public static void move(int[][] a, int xpos, int ypos)
     {
         int[] pos = {xpos, ypos};
         boolean selected = false;
-		if(checkFill(a)==false)
-		{
-		    System.out.println(checkFill(a));
-		    while(selected!=true)
-		    {
-	            double r = Math.random();
-                xpos = pos[0];
-                ypos = pos[1];
-	            if(r<0.125)
-	            {
-	                pos[0]+=2;
-	                pos[1]+=1;
-	            }    
-	            if(r<0.25 && r>=0.125)
-	            {    
-	                pos[0]+=2;
-	                pos[1]-=1;
-	            }
-	            if(r<0.375 && r>=0.25)
-	            {
-	                pos[0]-=2;
-	                pos[1]+=1;
-	            }
-	            if(r<0.5 && r>=0.375)
-	            {
-	                pos[0]-=2;
-	                pos[1]-=1;
-	            }
-	            if(r<0.625 && r>=0.375)
-	            {
-	                pos[0]+=1;
-	                pos[1]+=2;
-	            }
-	            if(r<0.8 && r>=0.625)
-	            {
-	                pos[0]-=1;
-	                pos[1]+=2;
-	            }
-	            if(r<0.925 && r>=0.8)
-	            {
-	                pos[0]-=1;
-	                pos[1]-=2;
-	            }
-	            if(r<1 && r>=0.925)
-	            {
-	                pos[0]+=1;
-	                pos[1]-=2;
-	            }
-		        if(pos[0]<8 && pos[0]>0 && pos[1]<8 && pos[1]>0 && a[pos[0]][pos[1]]==0)
-	            {    
-			        	selected=true;
-	           	   a[pos[0]][pos[1]] = 1;
-						update(a);
-	                break;
-	            }
-	            //else reset values
-	            pos[0]=xpos;
-	            pos[1]=ypos;
-		    }   
-         move(a, pos[0], pos[1]);
+	         move(a, pos[0], pos[1]);
   		 }  
 	 }    
     public static void main(String[] args)
