@@ -86,15 +86,16 @@ public class KnightTour
             if(a[spot[0]][spot[1]]==0) 
             {
                  oold = old; old=pos; pos=spot;
-                 a[pos[0]][pos[1]]=movenumber;
                  movenumber++;
+                 a[pos[0]][pos[1]]=movenumber;
                  move(a, pos, old, movenumber);
             }
             else{
                     pos = old; old = oold;
-                    movenumber-=1;
+                    if(movenumber>=3)
+                        movenumber-=1;
                     a[pos[0]][pos[1]]=movenumber;
-                    //move(a, pos,old, movenumber);
+                    move(a, pos,old, movenumber);
                 }
         }
 	}  
