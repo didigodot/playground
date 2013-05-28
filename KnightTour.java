@@ -37,75 +37,41 @@ public class KnightTour
 				}
 		return b;
 	 }
-    //picks spot at random, doesn't care about whether it works
-	public static int[] pickSpot(int[][] a, int[] pos)
-    {
-	    boolean selected = false;
-        int[] pair = new int[2]; // wil hold return value
-        while(selected!=true)
-		    {
-	            double r = Math.random();
-                pair[0] = pos[0];
-                pair[1] = pos[1];
-	            if(r<0.125){ pos[0]+=2; pos[1]+=1; }    
-	            if(r<0.25 && r>=0.125)
-	            { pos[0]+=2; pos[1]-=1; }
-	            if(r<0.375 && r>=0.25)
-	            { pos[0]-=2; pos[1]+=1;}
-	            if(r<0.5 && r>=0.375)
-	            {pos[0]-=2; pos[1]-=1;}
-	            if(r<0.625 && r>=0.375)
-	            { pos[0]+=1; pos[1]+=2;}
-	            if(r<0.8 && r>=0.625)
-	            {pos[0]-=1; pos[1]+=2;}
-	            if(r<0.925 && r>=0.8)
-	            {pos[0]-=1; pos[1]-=2;}
-	            if(r<1 && r>=0.925)
-	            { pos[0]+=1; pos[1]-=2;}
-
-		        if(pos[0]<8 && pos[0]>0 && pos[1]<8 && pos[1]>0)
-	            {    
-			       selected=true;
-                   pair[0] = pos[0];
-                   pair[1] = pos[1];
-	               break;
-	            }
-	            //else reset values
-	            pos[0]=pair[0];
-	            pos[1]=pair[1];
-		     }
-            return pair;    
-    }   
     	
     public static void move(int[][] board, int[] pos, int movenumber)
     {
-        if(checkFill(board)==false)
+        int[] oldpos = pos;
+        board[pos[0]][pos[1]] = movenumber;
+        drawBoard(board);
+        if(checkFill(board)==true)
+        {
+            drawBoard(board);
+        }
+        else
         {
             for(int i = 0; i<8; i++)
             {
                 int newx = pos[0]+moves[0][i];
+                System.out.println(moves[0][i]+", "+moves[1][i]);
                 int newy = pos[1]+moves[1][i];
+                // if bounded and not visisted before
                 if(newx>=0 && newx<8 &&
                    newy>=0 && newy<8 &&
                    board[newx][newy]==0)
                 {       
-                 movenumber++;
-                 board[newx][newy]=movenumber;
                  int[] x = {newx, newy};
-                 move(board, x, movenumber);
+                 move(board, x, movenumber+1);
                 }
             }
         }
+         board[pos[0]][pos[1]]=0;
      }
       
     public static void main(String[] args)
     {
         int[][] board = new int[8][8];
-        int[] pos = {(int)(Math.random()*7), (int)(Math.random()*7)};
-        int[] old = pos;
-        board[pos[0]][pos[1]] = 1;
-        int m = 1;
-        move(board, pos, m);
-        drawBoard(board); //figure it all out, then draw. 
+        //int[] pos = {(int)(Math.random()*7), (int)(Math.random()*7)};
+        int[] pos = {0,0};
+        move(board, pos, 1);
     }
 }
